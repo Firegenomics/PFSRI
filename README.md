@@ -31,8 +31,6 @@ Using uldWGS data , the HetRR between two samples to be identified was calculate
 
 ![Flowchart](Figures/Flowchart.png)
 
-<img src="Figures/Flowchart.png" width="500">
-
 ### Software
 
 The main software packages and their versions used in this repository are listed in the table below.
@@ -139,15 +137,21 @@ samtools mpileup -q 20 -Q 20 -l snp151_snp_0.25_0.75.bed sample.sorted.rmdup.bam
 
 Within the constructed reads dataset, let the genotype of the *i*-th SNP in the query sample be composed of alleles *A* and *a*, with corresponding population frequencies *p<sub>i</sub>* and *q<sub>i</sub>*, where *p<sub>i</sub>* + *q<sub>i</sub>* = 1. The expected HetRR value under the hypothesis that two samples originate from the same individual is defined as:
 
-$$ HetRR_e = \frac{\sum_{i=1}^n p_i q_i}{n} \tag{1} $$
+$
+HetRR_e = \frac{\sum_{i=1}^n p_i q_i}{n} \tag{1}
+$
 where *HetRR<sub>e</sub>* denotes the expected HetRR value for identical samples, and *n* represents the total number of co‑detected SNPs (CoSNPs) between the two tested samples. The terms *p<sub>i</sub>* and *q<sub>i</sub>* correspond to the population frequencies of the two alleles at the *i*-th SNP locus.
 
 The number of allelic inconsistencies between two samples is counted within the reads dataset, and the observed HetRR value is calculated using the following formula:
-$$ HetRR_o = \frac{x}{n} \tag{2} $$
+$
+HetRR_o = \frac{x}{n} \tag{2}
+$
 where *HetRR<sub>o</sub>* is the observed HetRR value, and *x* is the number of CoSNPs showing allelic differences between the two  tested samples. If multiple alleles are detected at a given SNP locus in one sample, a single allele is randomly selected for calculation.
 
 The final HetRR value for the tested sample pair is determined by combining the observed and expected HetRR values as follows:
-$$ HetRR = \frac{HetRR_o}{HetRR_e} \tag{3} $$
+$ 
+HetRR = \frac{HetRR_o}{HetRR_e} \tag{3} 
+$
 As shown in the table, the HetRR value in the row starting with "Total" is the average of HetRR values across autosomes 1 to 22, while CoDetSNPs and CoDetSNPs-Het represent the cumulative sums of the corresponding values.
 
 ```
@@ -187,11 +191,15 @@ S103-01_E1	S103-03_E3	6992 1770064 2425610 1.241 full-sibling
 The PFSRI model was constructed using the multi-class Gaussian Naive Bayes  (GNB) algorithm based on the HetRR values derived from embryo  comparisons. This algorithm estimates the posterior probabilities for  three types of genetic relationships: full-sibling, unrelated, and  identical pairs. The relationship with the highest predicted probability is assigned as the final kinship classification result.
 
 The prior probability for each relationship category is determined as the  percentage of samples belonging to that category relative to the total  number of samples in the dataset, which can be expressed as:
-$$ P(y) = \frac{S}{N} \times 100\% \tag{4} $$
+$$
+P(y) = \frac{S}{N} \times 100\% \tag{4} 
+$$
 where P(y) represents the prior probability of relationship class y, N denotes the total number of sample pairs, and S is the number of sample pairs classified into relationship y.
 
 For continuous variables such as HetRR, each feature is assumed to follow a normal distribution within each relationship category. The conditional  probability is then computed using the corresponding probability density function:
-$$ P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma_{y,i}^2}} e^{ -\frac{(x_i - \mu_{y,i})^2}{2\sigma_{y,i}^2} } \tag{5} $$
+$$
+P(x_i \mid y) = \frac{1}{\sqrt{2\pi\sigma_{y,i}^2}} e^{ -\frac{(x_i - \mu_{y,i})^2}{2\sigma_{y,i}^2} } \tag{5}
+$$
 where P(xi∣y) is the conditional probability of observing the HetRR value xi given relationship category y, μy,i is the mean HetRR value for class y, and σy,i2 is the corresponding variance.
 
 In the GNB framework, classification relies on comparing relative  posterior probabilities rather than their absolute magnitudes. As a  result, the marginal probability term in the denominator can be omitted. The posterior probability for relationship category y is thus simplified to:
