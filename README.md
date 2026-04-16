@@ -34,9 +34,9 @@ Using uldWGS data , the HetRR between two samples to be identified was calculate
 ### Software
 
 The main software packages and their versions used in this repository are listed in the table below.
-
-| BWA mem (version: 0.7.17-r1188)   | https://github.com/lh3/bwa                    |
+| Software                          | URL                                           |
 | --------------------------------- | --------------------------------------------- |
+| BWA mem (version: 0.7.17-r1188)   | https://github.com/lh3/bwa                    |
 | Samtools (version: 1.11)          | https://github.com/samtools/samtools          |
 | scikit-learn (version: 1.0.2)     | https://scikit-learn.org                      |
 | pandas (version: 1.2.5)           | https://pandas.pydata.org                     |
