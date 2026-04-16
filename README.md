@@ -29,7 +29,7 @@ This model is designed to:
 
 Using uldWGS data , the HetRR between two samples to be identified was calculated. Based on the HetRR, the PFSRI model was constructed, with the Gaussian Naive Bayes (GNB) machine learning algorithm adopted for model training and testing using the cohort dataset. Subsequently, the model was used to classify and evaluate the relatedness between embryo pairs, with reference to the HetRR thresholds established for three relationship types (full-sibling, unrelated, identical). 
 
-![Flowchart](Figures\Flowchart.png)
+![Flowchart](Figures/Flowchart.png)
 
 ### Software
 
